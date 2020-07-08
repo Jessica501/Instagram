@@ -5,6 +5,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -29,6 +31,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
     private File photoFile;
     public String photoFileName = "photo.jpg";
 
+    public List<Post> allPosts;
+    public PostsAdapter adapter;
+
     ActivityMainBinding binding;
 
     @Override
@@ -47,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        allPosts = new ArrayList<>();
+        adapter = new PostsAdapter(this, allPosts);
+
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        binding.rvPosts.setLayoutManager(layoutManager);
+        binding.rvPosts.setAdapter(adapter);
+        queryPosts();
 
         MaterialToolbar bar = binding.toolbar;
         bar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -69,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         
-//        queryPosts();
         binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,6 +180,9 @@ public class MainActivity extends AppCompatActivity {
     private void queryPosts() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
+        query.include(Post.KEY_DESCRIPTION);
+        query.setLimit(20);
+        query.addDescendingOrder(Post.KEY_CREATED_AT);
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {
@@ -174,8 +191,10 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 for (Post post: posts) {
-                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
+                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername() + ", description: " + post.getDescription());
                 }
+                allPosts.addAll(posts);
+                adapter.notifyDataSetChanged();
             }
         });
 
