@@ -1,9 +1,11 @@
 package com.example.instagram;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 import com.example.instagram.databinding.ActivityMainBinding;
 import com.example.instagram.models.Post;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -76,6 +79,26 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(i);
                 }
                 return false;
+            }
+        });
+
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment;
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        Toast.makeText(MainActivity.this, "Home!", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_compose:
+                        Toast.makeText(MainActivity.this, "Compose!", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.action_profile:
+                    default:
+                        Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+                return true;
             }
         });
 
