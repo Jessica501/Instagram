@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.instagram.MainActivity;
@@ -69,6 +70,7 @@ public class ComposeFragment extends Fragment {
         binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                binding.progressBar.setVisibility(ProgressBar.VISIBLE);
                 String description = String.valueOf(binding.etDescription.getText());
                 if (description.isEmpty()) {
                     Toast.makeText(getContext(), "Description can't be empty", Toast.LENGTH_SHORT).show();
@@ -80,7 +82,7 @@ public class ComposeFragment extends Fragment {
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(description, currentUser, photoFile);
-
+                binding.progressBar.setVisibility(ProgressBar.INVISIBLE);
             }
         });
     }
