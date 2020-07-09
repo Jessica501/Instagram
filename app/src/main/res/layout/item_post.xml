@@ -32,4 +32,13 @@
         app:layout_constraintStart_toStartOf="@+id/tvUser"
         app:layout_constraintTop_toBottomOf="@+id/ivPostImage"
         tools:text="Description" />
+
+    <TextView
+        android:id="@+id/tvTimestamp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvUser"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+        tools:text="Timestamp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
