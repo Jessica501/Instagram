@@ -18,6 +18,8 @@ import com.parse.ParseFile;
 
 import java.util.List;
 
+
+
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
     private Context context;
     private List<Post> posts;
@@ -43,6 +45,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     public int getItemCount() {
         return this.posts.size();
     }
+
+
 
     public void clear() {
         posts.clear();
