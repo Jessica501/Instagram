@@ -15,7 +15,7 @@
         android:hint="username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -33,7 +33,9 @@
         android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="#2196F3"
         android:text="Login"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/etUsername"
         app:layout_constraintStart_toStartOf="@+id/etUsername"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />
@@ -42,9 +44,22 @@
         android:id="@+id/btnSignup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="#2196F3"
         android:text="Sign Up"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/etUsername"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/etUsername"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25"
+        app:srcCompat="@drawable/nav_logo_whiteout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
