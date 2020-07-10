@@ -14,6 +14,8 @@ public class Post extends ParseObject {
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
+    public static final String KEY_LIKES_COUNT = "likesCount";
+    public static final String KEY_LIKES = "likedBy";
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
@@ -37,5 +39,20 @@ public class Post extends ParseObject {
 
     public void setUser(ParseUser user) {
         put(KEY_USER, user);
+    }
+
+    public int getLikesCount() {
+//        return getJSONArray(KEY_LIKES).length();
+        return getInt(KEY_LIKES_COUNT);
+    }
+
+    public void incrementLikesCount() {
+        put(KEY_LIKES_COUNT, getLikesCount()+1);
+        saveInBackground();
+    }
+
+    public void decrementLikesCount() {
+        put(KEY_LIKES_COUNT, getLikesCount()-1);
+        saveInBackground();
     }
 }

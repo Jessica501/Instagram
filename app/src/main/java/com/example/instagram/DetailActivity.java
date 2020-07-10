@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.example.instagram.databinding.ActivityDetailBinding;
@@ -30,11 +31,9 @@ public class DetailActivity extends AppCompatActivity {
         query.include(Post.KEY_USER);
         query.include(Post.KEY_DESCRIPTION);
         query.include(Post.KEY_IMAGE);
-        // First try to find from the cache and only then go to network
-        query.setCachePolicy(ParseQuery.CachePolicy.CACHE_ELSE_NETWORK); // or CACHE_ONLY
         // Execute the query to find the object with ID
         query.getInBackground(postId, new GetCallback<Post>() {
-            public void done(Post item, ParseException e) {
+            public void done(final Post item, ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Issue with getting posts", e);
                     return;
@@ -44,9 +43,27 @@ public class DetailActivity extends AppCompatActivity {
                 binding.tvUsername.setText(item.getUser().getUsername());
                 binding.tvDescription.setText(item.getDescription());
                 binding.tvTimestamp.setText(String.valueOf(item.getCreatedAt()));
+                binding.tvLikesCount.setText(String.valueOf(item.getLikesCount()) + " likes");
                 Glide.with(getApplicationContext())
                         .load(item.getImage().getUrl())
                         .into(binding.ivPostImage);
+
+
+                binding.ivLike.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (view.isActivated()) {
+                            view.setActivated(false);
+                            item.decrementLikesCount();
+                            binding.tvLikesCount.setText(String.valueOf(item.getLikesCount()) + " likes");
+                        }
+                        else {
+                            view.setActivated(true);
+                            item.incrementLikesCount();
+                            binding.tvLikesCount.setText(String.valueOf(item.getLikesCount()) + " likes");
+                        }
+                    }
+                });
             }
         });
 

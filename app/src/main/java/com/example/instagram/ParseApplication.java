@@ -17,7 +17,7 @@ public class ParseApplication extends Application {
         // clientKey is not needed unless explicitly configured
         // any network interceptors must be added with the Configuration Builder given this syntax
         Parse.initialize(new Parse.Configuration.Builder(this)
-                .applicationId("jyxu-parstagram") // should correspond to APP_ID env variable
+                .applicationId("parstagram") // should correspond to APP_ID env variable
                 .clientKey("fbuParse2020")  // set explicitly unless clientKey is explicitly configured on Parse server
                 .server("https://jyxu-parstagram.herokuapp.com/parse").build());
     }

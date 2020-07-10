@@ -67,10 +67,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             itemView.setOnClickListener(this);
         }
 
-        public void bind(Post post) {
+        public void bind(final Post post) {
             binding.tvDescription.setText(post.getDescription());
             binding.tvUser.setText(post.getUser().getUsername());
             binding.tvTimestamp.setText(String.valueOf(post.getCreatedAt()));
+            binding.tvLikesCount.setText(String.valueOf(post.getLikesCount()) + " likes");
+
             ParseFile image = post.getImage();
             if (image != null) {
                 Glide.with(context)
@@ -90,7 +92,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 i.putExtra("post_id", post.getObjectId());
                 context.startActivity(i);
             }
-
         }
     }
 }
