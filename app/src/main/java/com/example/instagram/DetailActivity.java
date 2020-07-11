@@ -7,10 +7,12 @@ import android.util.Log;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.instagram.databinding.ActivityDetailBinding;
 import com.example.instagram.models.Post;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 
 public class DetailActivity extends AppCompatActivity {
@@ -47,6 +49,16 @@ public class DetailActivity extends AppCompatActivity {
                 Glide.with(getApplicationContext())
                         .load(item.getImage().getUrl())
                         .into(binding.ivPostImage);
+
+                ParseFile profile = item.getUser().getParseFile("profile");
+                if (profile != null) {
+                    Glide.with(getApplicationContext())
+                            .load(profile.getUrl())
+                            .transform(new RoundedCorners(48))
+                            .into(binding.ivProfile);
+                } else {
+                    binding.ivProfile.setImageResource(R.drawable.instagram_user_outline_24);
+                }
 
 
                 binding.ivLike.setOnClickListener(new View.OnClickListener() {

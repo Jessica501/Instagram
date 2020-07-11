@@ -1,9 +1,13 @@
 package com.example.instagram.models;
 
+import android.util.Log;
+
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import org.parceler.Parcel;
 
@@ -15,7 +19,6 @@ public class Post extends ParseObject {
     public static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
     public static final String KEY_LIKES_COUNT = "likesCount";
-    public static final String KEY_LIKES = "likedBy";
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
@@ -48,11 +51,27 @@ public class Post extends ParseObject {
 
     public void incrementLikesCount() {
         put(KEY_LIKES_COUNT, getLikesCount()+1);
-        saveInBackground();
+        saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null) {
+                    Log.e("Post", "Error incrementing like count", e);
+                }
+            }
+        });
     }
 
     public void decrementLikesCount() {
         put(KEY_LIKES_COUNT, getLikesCount()-1);
-        saveInBackground();
+        saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null) {
+                    Log.e("Post", "Error decrementing like count", e);
+                }
+            }
+        });
     }
+
+
 }

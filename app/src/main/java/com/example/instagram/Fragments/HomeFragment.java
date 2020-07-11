@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
     protected List<Post> allPosts;
     protected PostsAdapter adapter;
 
-     public HomeFragment() {
+    public HomeFragment() {
         // Required empty public constructor
     }
 

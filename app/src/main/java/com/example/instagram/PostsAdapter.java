@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.instagram.databinding.ItemPostBinding;
 import com.example.instagram.models.Post;
 import com.parse.ParseFile;
@@ -78,6 +79,16 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Glide.with(context)
                         .load(image.getUrl())
                         .into(binding.ivPostImage);
+            }
+
+            ParseFile profile = post.getUser().getParseFile("profile");
+            if (profile != null) {
+                Glide.with(context)
+                        .load(profile.getUrl())
+                        .transform(new RoundedCorners(48))
+                        .into(binding.ivProfile);
+            } else {
+                binding.ivProfile.setImageResource(R.drawable.instagram_user_outline_24);
             }
         }
 
