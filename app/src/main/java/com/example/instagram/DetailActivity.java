@@ -54,7 +54,7 @@ public class DetailActivity extends AppCompatActivity {
                 if (profile != null) {
                     Glide.with(getApplicationContext())
                             .load(profile.getUrl())
-                            .transform(new RoundedCorners(48))
+                            .circleCrop()
                             .into(binding.ivProfile);
                 } else {
                     binding.ivProfile.setImageResource(R.drawable.instagram_user_outline_24);

@@ -85,7 +85,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             if (profile != null) {
                 Glide.with(context)
                         .load(profile.getUrl())
-                        .transform(new RoundedCorners(48))
+                        .circleCrop()
                         .into(binding.ivProfile);
             } else {
                 binding.ivProfile.setImageResource(R.drawable.instagram_user_outline_24);
@@ -94,7 +94,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(context, "Clicked post!", Toast.LENGTH_SHORT).show();
             Log.i("PostsAdapter", "clicked post");
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {

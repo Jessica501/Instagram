@@ -130,7 +130,7 @@ public class ProfileFragment extends Fragment {
         ParseFile profile = ParseUser.getCurrentUser().getParseFile("profile");
         Glide.with(getContext())
                 .load(profile.getUrl())
-                .transform(new RoundedCorners(64))
+                .circleCrop()
                 .into(binding.ivProfile);
 
         binding.ivProfile.setOnClickListener(new View.OnClickListener() {
@@ -208,8 +208,11 @@ public class ProfileFragment extends Fragment {
             if (resultCode == RESULT_OK) {
                 // by this point we have the camera photo on disk
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-                // Load the taken image into a preview
-                binding.ivProfile.setImageBitmap(takenImage);
+//                // Load the taken image into a preview
+                Glide.with(getContext())
+                        .load(takenImage)
+                        .circleCrop()
+                        .into(binding.ivProfile);
                 savePost(ParseUser.getCurrentUser(), photoFile);
             } else { // Result was a failure
                 Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();

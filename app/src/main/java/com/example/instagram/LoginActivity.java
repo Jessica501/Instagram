@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 } else {
                     goMainActivity();
-                    Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Signed up!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -81,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 // navigate to the main activity if the user has signed in properly
                 goMainActivity();
-                Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Logged in!", Toast.LENGTH_SHORT).show();
 
             }
         });
