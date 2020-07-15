@@ -19,8 +19,6 @@ import com.parse.ParseFile;
 
 import java.util.List;
 
-
-
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
     private Context context;
     private List<Post> posts;
@@ -47,19 +45,17 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         return this.posts.size();
     }
 
-
-
     public void clear() {
         posts.clear();
         notifyDataSetChanged();
     }
 
-    public void addAll(List<Post> list) {
-        this.posts.addAll(list);
+    public void addAll(List<Post> posts) {
+        this.posts.addAll(posts);
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ItemPostBinding binding;
 
         public ViewHolder(ItemPostBinding b) {

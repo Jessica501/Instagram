@@ -9,9 +9,6 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-import org.parceler.Parcel;
-
-import java.util.Date;
 
 @ParseClassName("Post")
 public class Post extends ParseObject {
